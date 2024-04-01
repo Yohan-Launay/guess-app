@@ -8,5 +8,6 @@ export default class extends BaseSeeder {
     await this.seed(await import('../artist_seeder.js'))
     await this.seed(await import('../genre_seeder.js'))
     await this.seed(await import('../label_seeder.js'))
+    await this.seed(await import('../user_seeder.js'))
   }
 }

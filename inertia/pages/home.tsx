@@ -93,15 +93,15 @@ export default function Home(props: { artists: any }) {
 
   let messageNbAlbumStudio = null
   if (minNbAlbums && maxNbAlbums && minNbAlbums !== maxNbAlbums) {
-    messageNbAlbumStudio = `Entre ${minNbAlbums} et ${maxNbAlbums}`
+    messageNbAlbumStudio = `Entre ${minNbAlbums} et ${maxNbAlbums} album(s) studio`
   } else if (minNbAlbums && minNbAlbums !== maxNbAlbums) {
-    messageNbAlbumStudio = `Plus de ${minNbAlbums}`
+    messageNbAlbumStudio = `Plus de ${minNbAlbums} album(s) studio`
   } else if (maxNbAlbums && minNbAlbums !== maxNbAlbums) {
-    messageNbAlbumStudio = `Moins de ${maxNbAlbums}`
+    messageNbAlbumStudio = `Moins de ${maxNbAlbums} album(s) studio `
   } else if (minNbAlbums === maxNbAlbums && minNbAlbums !== null && maxNbAlbums !== null) {
     messageNbAlbumStudio = (
       <span>
-        {minNbAlbums} <FontAwesomeIcon icon={faCheck} />
+        {minNbAlbums} album(s) studio <FontAwesomeIcon icon={faCheck} />
       </span>
     )
   } else {
@@ -139,7 +139,7 @@ export default function Home(props: { artists: any }) {
 
   return (
     <section id="section_home" className="container">
-      <p>{message || "Trouvez l'artiste"}</p>
+      <p className="message">{message || "Trouvez l'artiste"}</p>
       <InputSearch suggestions={artistNames} onEnter={addArtist} />
       <div className="all_indice">
         {messageOrigin && (

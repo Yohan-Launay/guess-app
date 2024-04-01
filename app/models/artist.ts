@@ -15,7 +15,7 @@ export default class Artist extends BaseModel {
   declare origin: string
 
   @column()
-  declare yearsActive: string
+  declare yearsStarting: number
 
   @column()
   declare nbAlbumStudio: number

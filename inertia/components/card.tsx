@@ -2,7 +2,7 @@ interface ArtistProps {
   id: number
   name: string
   origin: string
-  yearsActive: string
+  yearsStarting: string
   nbAlbumStudio: number
   imgPath: string
   genres: { id: number; name: string }[] | null
@@ -48,8 +48,8 @@ export function Card(props: ArtistProps) {
             <p>Origin</p>
           </div>
           <div>
-            <h3>{props.yearsActive}</h3>
-            <p>Years active</p>
+            <h3>{props.yearsStarting}</h3>
+            <p>Years starting</p>
           </div>
           <div>
             <h3>{props.nbAlbumStudio}</h3>

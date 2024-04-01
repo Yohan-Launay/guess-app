@@ -6,17 +6,19 @@ interface InputSearchProps {
   onEnter: (artist: string) => void
 }
 
+// @ts-ignore
 export function InputSearch({ suggestions, onEnter }: InputSearchProps) {
   const [value, setValue] = useState<string>('')
   const [selectedArtist, setSelectedArtist] = useState<string | null>(null)
   const [suggestionsList, setSuggestionsList] = useState<string[]>([])
   const [tempArtist, setTempArtist] = useState<string | null>(null)
 
-  const onChange = (event, { newValue }) => {
+  const onChange = (_: any, { newValue }: { newValue: string }) => {
     setValue(newValue)
   }
 
-  const onSuggestionsFetchRequested = ({ value }) => {
+  // eslint-disable-next-line @typescript-eslint/no-shadow
+  const onSuggestionsFetchRequested = ({ value }: { value: any }) => {
     const inputValue = value.trim().toLowerCase()
     const inputLength = inputValue.length
 
@@ -33,9 +35,13 @@ export function InputSearch({ suggestions, onEnter }: InputSearchProps) {
     setSuggestionsList([])
   }
 
-  const getSuggestionValue = (suggestion) => suggestion
+  const getSuggestionValue = (suggestion: string) => {
+    return suggestion
+  }
 
-  const renderSuggestion = (suggestion) => <div>{suggestion}</div>
+  const renderSuggestion = (suggestion: string) => {
+    return <div>{suggestion}</div>
+  }
 
   const inputProps = {
     placeholder: 'Search',
@@ -43,7 +49,7 @@ export function InputSearch({ suggestions, onEnter }: InputSearchProps) {
     onChange: onChange,
   }
 
-  const handleKeyDown = (event) => {
+  const handleKeyDown = (event: { key: string }) => {
     if (event.key === 'Enter' && selectedArtist) {
       setTempArtist(selectedArtist) // Stocke l'artiste sélectionné dans l'état temporaire
       setValue('') // Réinitialise la valeur de l'input
@@ -68,7 +74,7 @@ export function InputSearch({ suggestions, onEnter }: InputSearchProps) {
         getSuggestionValue={getSuggestionValue}
         renderSuggestion={renderSuggestion}
         inputProps={inputProps}
-        onSuggestionSelected={(event, { suggestionValue }) => setSelectedArtist(suggestionValue)}
+        onSuggestionSelected={(_event, { suggestionValue }) => setSelectedArtist(suggestionValue)}
       />
     </div>
   )

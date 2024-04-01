@@ -8,7 +8,7 @@ export default class extends BaseSchema {
       table.increments('id')
       table.string('name').notNullable()
       table.string('origin').notNullable()
-      table.string('years_active').notNullable()
+      table.integer('years_starting').notNullable()
       table.integer('nb_album_studio').notNullable()
       table.string('img_path').notNullable()
       table.unique(['name'])

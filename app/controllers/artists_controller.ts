@@ -22,7 +22,7 @@ export default class ArtistsController {
     await Artist.create({
       name: payload.name,
       origin: payload.origin,
-      yearsActive: payload.yearsActive,
+      yearsStarting: payload.yearsStarting,
       nbAlbumStudio: payload.nbAlbumStudio,
       imgPath: payload.imgPath.fileName,
     })
@@ -59,7 +59,7 @@ export default class ArtistsController {
       .merge({
         name: payload.name,
         origin: payload.origin,
-        yearsActive: payload.yearsActive,
+        yearsStarting: payload.yearsStarting,
         nbAlbumStudio: payload.nbAlbumStudio,
       })
       .save()

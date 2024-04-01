@@ -8,7 +8,7 @@ export const createArtistValidator = vine.compile(
   vine.object({
     name: vine.string(),
     origin: vine.string(),
-    yearsActive: vine.string(),
+    yearsStarting: vine.number(),
     nbAlbumStudio: vine.number(),
     imgPath: vine.file({
       size: '10mb',
@@ -25,7 +25,7 @@ export const updateArtistValidator = vine.compile(
   vine.object({
     name: vine.string(),
     origin: vine.string(),
-    yearsActive: vine.string(),
+    yearsStarting: vine.number(),
     nbAlbumStudio: vine.number(),
     imgPath: vine.file({
       size: '10mb',

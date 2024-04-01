@@ -14,8 +14,8 @@ export default function Home(props: { artists: any }) {
   const [randomData] = useState(() => getRandomObject(props.artists))
   const [minNbAlbums, setMinNbAlbums] = useState<number | null>(null)
   const [maxNbAlbums, setMaxNbAlbums] = useState<number | null>(null)
-  const [minYearsActive, setMinYearsActive] = useState<number | null>(null)
-  const [maxYearsActive, setMaxYearsActive] = useState<number | null>(null)
+  const [minYearsStarting, setMinYearsStarting] = useState<number | null>(null)
+  const [maxYearsStarting, setMaxYearsStarting] = useState<number | null>(null)
 
   const artistNames = props.artists.map((artist: any) => artist.name)
 
@@ -50,40 +50,36 @@ export default function Home(props: { artists: any }) {
         setMaxNbAlbums(artist.nbAlbumStudio)
       }
 
-      // Convertir les années de début en nombres entiers
-      const artistYearsActive = Number.parseInt(artist.yearsActive)
-      const randomYearsActive = Number.parseInt(randomData.yearsActive)
-
-      console.log('Artist years active:', artistYearsActive)
-      console.log('Random years active:', randomYearsActive)
+      console.log('Artist years active:', artist.yearsStarting)
+      console.log('Random years active:', randomData.yearsStarting)
 
       // Calcul de la différence entre l'année de début de l'artiste et l'année de début aléatoire
-      const differenceYears = Math.abs(artistYearsActive - randomYearsActive)
+      const differenceYears = Math.abs(artist.yearsStarting - randomData.yearsStarting)
       // @ts-ignore
-      const currentDifferenceMinYears = Math.abs(minYearsActive - randomYearsActive)
+      const currentDifferenceMinYears = Math.abs(minYearsStarting - randomData.yearsStarting)
       // @ts-ignore
-      const currentDifferenceMaxYears = Math.abs(maxYearsActive - randomYearsActive)
+      const currentDifferenceMaxYears = Math.abs(maxYearsStarting - randomData.yearsStarting)
 
       console.log('Difference years:', differenceYears)
       console.log('Current Difference Min years:', currentDifferenceMinYears)
       console.log('Current Difference Max years:', currentDifferenceMaxYears)
-      console.log('Min years:', minYearsActive)
-      console.log('Max years:', maxYearsActive)
+      console.log('Min years:', minYearsStarting)
+      console.log('Max years:', maxYearsStarting)
 
       // Mettre à jour minYearsActive et maxYearsActive en fonction de la comparaison
-      if (artistYearsActive < randomYearsActive) {
+      if (artist.yearsStarting < randomData.yearsStarting) {
         if (differenceYears < currentDifferenceMinYears) {
           console.log('Updating minYearsActive...')
-          setMinYearsActive(artistYearsActive)
+          setMinYearsStarting(artist.yearsStarting)
         }
-      } else if (artistYearsActive > randomYearsActive) {
+      } else if (artist.yearsStarting > randomData.yearsStarting) {
         if (differenceYears < currentDifferenceMaxYears) {
           console.log('Updating maxYearsActive...')
-          setMaxYearsActive(artistYearsActive)
+          setMaxYearsStarting(artist.yearsStarting)
         }
-      } else if (artistYearsActive === randomYearsActive) {
-        setMinYearsActive(artistYearsActive)
-        setMaxYearsActive(artistYearsActive)
+      } else if (artist.yearsStarting === randomData.yearsStarting) {
+        setMinYearsStarting(artist.yearsStarting)
+        setMaxYearsStarting(artist.yearsStarting)
       }
     }
   }
@@ -112,38 +108,28 @@ export default function Home(props: { artists: any }) {
     messageNbAlbumStudio = ''
   }
 
-  // années de début de l'artiste random & parse en number
-  let yearsActiveRandom = randomData.yearsActive
-  let parseRandom = Number.parseInt(yearsActiveRandom)
-  // console.log('yearsActiveRandom:', parseRandom)
+  let yearsStartingRandom = randomData.yearsStarting
+  console.log('Years active random:', yearsStartingRandom)
 
-  // années de début de l'artiste selectionner
-  let yearsActiveSelected = selectedArtists.map((a: any) => a.yearsActive)
+  let yearsActiveSelected = selectedArtists.map((a: any) => a.yearsStarting)
   let yearsStartingSelected = yearsActiveSelected[0]
-  // Récupérer la première valeur du tableau et la convertir en number
-  yearsStartingSelected = Number.parseInt(yearsStartingSelected)
-  // console.log('yearsActiveSelected:', yearsStartingSelected)
 
-  // Comparer les années de début de l'artiste random avec les années de début de l'artiste selectionner
-  // Si les années de début de l'artiste selectionner est plus petit que les années de début de l'artiste random alors afficher "Plus récent que"
-  // Si les années de début de l'artiste selectionner est plus grand que les années de début de l'artiste random alors afficher "Plus ancien que"
-  // Si les années de début de l'artiste selectionner est égale aux années de début de l'artiste random alors afficher "Identique à"
   let messageYearsActive = null
   if (
-    minYearsActive !== null &&
-    maxYearsActive !== null &&
-    minYearsActive !== maxYearsActive &&
-    parseRandom >= minYearsActive &&
-    parseRandom <= maxYearsActive
+    minYearsStarting !== null &&
+    maxYearsStarting !== null &&
+    minYearsStarting !== maxYearsStarting &&
+    yearsStartingRandom >= minYearsStarting &&
+    yearsStartingRandom <= maxYearsStarting
   ) {
     // entre 2 dates
     console.log('Entre 2 dates')
-    messageYearsActive = `Entre ${minYearsActive} et ${maxYearsActive}`
-  } else if (yearsStartingSelected < parseRandom) {
+    messageYearsActive = `Entre ${minYearsStarting} et ${maxYearsStarting}`
+  } else if (yearsStartingSelected < yearsStartingRandom) {
     messageYearsActive = `Plus récent que ${yearsStartingSelected} (Début) `
-  } else if (yearsStartingSelected > parseRandom) {
+  } else if (yearsStartingSelected > yearsStartingRandom) {
     messageYearsActive = `Plus ancien que ${yearsStartingSelected} (Début)`
-  } else if (yearsStartingSelected === parseRandom) {
+  } else if (yearsStartingSelected === yearsStartingRandom) {
     messageYearsActive = (
       <span>
         {yearsStartingSelected} <FontAwesomeIcon icon={faCheck} />
@@ -179,7 +165,7 @@ export default function Home(props: { artists: any }) {
             id={a.id}
             name={a.name}
             origin={a.origin}
-            yearsActive={a.yearsActive}
+            yearsStarting={a.yearsStarting}
             nbAlbumStudio={a.nbAlbumStudio}
             imgPath={a.imgPath}
             genres={a.genres}

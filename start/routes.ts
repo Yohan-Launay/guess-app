@@ -23,6 +23,7 @@ router.get('/login', async ({ inertia }) => {
   return inertia.render('auth/login')
 })
 router.post('login', [SessionController, 'store'])
+
 router.post('logout', async ({ auth, response }) => {
   await auth.use('web').logout()
   response.redirect('/login')

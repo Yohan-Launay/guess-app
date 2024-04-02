@@ -13,7 +13,7 @@ export default class SessionController {
       await auth.use('web').login(user)
       response.redirect('/dashboard')
     } catch (error) {
-      return inertia.render('login', { error: 'Email ou mot de passe incorrect' })
+      return inertia.render('auth/login', { error: 'Email ou mot de passe incorrect' })
     }
   }
 }

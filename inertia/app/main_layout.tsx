@@ -1,9 +1,15 @@
 // MainLayout.jsx
 
-import { Link } from '@inertiajs/react'
+import { Link, useForm } from '@inertiajs/react'
+// import { HttpContext } from '@adonisjs/core/http'
 
 // @ts-ignore
 export default function MainLayout({ children }) {
+  const { post } = useForm({})
+  const handleLogout = () => {
+    post('/logout') // Envoie une requête POST à la route de déconnexion
+  }
+
   return (
     <div>
       <header>
@@ -21,7 +27,13 @@ export default function MainLayout({ children }) {
           </ul>
           <ul>
             <li>
-              <Link href="/login">Se connecter</Link>
+              <button onClick={handleLogout}>Déconnexion</button>
+            </li>
+            <li>
+              <Link href="/login">Connexion</Link>
+            </li>
+            <li>
+              <Link href="/register">Inscription</Link>
             </li>
           </ul>
         </nav>

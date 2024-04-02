@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Card } from '~/components/card'
+import { Card } from '~/components/artist/card'
 import { InputSearch } from '~/components/input_search'
 import { faCheck, faCompactDisc, faFlagCheckered } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

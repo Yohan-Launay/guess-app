@@ -20,7 +20,7 @@ router.get('/guess', [ArtistsController, 'index'])
 
 // Login and logout
 router.get('/login', async ({ inertia }) => {
-  return inertia.render('login')
+  return inertia.render('auth/login')
 })
 router.post('login', [SessionController, 'store'])
 router.post('logout', async ({ auth, response }) => {
@@ -32,7 +32,7 @@ router.post('logout', async ({ auth, response }) => {
 router
   .get('dashboard', ({ auth, inertia }) => {
     const user = auth.getUserOrFail()
-    return inertia.render('dashboard/index', { user })
+    return inertia.render('admin/dashboard', { user })
   })
   .use(
     middleware.auth({

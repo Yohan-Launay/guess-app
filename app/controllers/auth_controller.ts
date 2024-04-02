@@ -16,6 +16,6 @@ export default class AuthController {
   //   const { uid, password } = request.all() // Utilisez uid au lieu de email si c'est le nom du champ dans votre formulaire de login
   //   await auth.attempt(uid, password)
   //
-  //   return response.redirect('/dashboard')
+  //   return response.redirect('/admin')
   // }
 }

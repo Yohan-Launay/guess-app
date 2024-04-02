@@ -19,7 +19,7 @@ export default function Login({ error }: { error: string | null }) {
 
   return (
     <section>
-      <a href="/">Retour</a>
+      <a href="/public">Retour</a>
       <div id="login">
         <form onSubmit={handleSubmit}>
           <div>

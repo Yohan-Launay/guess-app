@@ -10,7 +10,8 @@ export default class ArtistsController {
    */
   async index({ inertia }: HttpContext) {
     const artists = await Artist.query().preload('labels').preload('genres')
-    return inertia.render('home', { artists })
+    // return inertia.render('', { artists })
+    return inertia.render('games/guess', { artists })
   }
 
   /**

@@ -10,10 +10,13 @@
 import router from '@adonisjs/core/services/router'
 const ArtistsController = () => import('#controllers/artists_controller')
 import { middleware } from '#start/kernel'
+const HomeController = () => import('#controllers/home_controller')
 const SessionController = () => import('#controllers/session_controller')
 
+router.get('/', [HomeController, 'index'])
+
 // Home artist page
-router.get('/', [ArtistsController, 'index'])
+router.get('/guess', [ArtistsController, 'index'])
 
 // Login and logout
 router.get('/login', async ({ inertia }) => {

@@ -13,7 +13,6 @@ export default function Login({ error }: { error: string | null }) {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log('data:', data)
     post('/login')
   }
 

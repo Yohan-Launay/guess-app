@@ -33,6 +33,7 @@ router.post('logout', async ({ auth, response }) => {
 router
   .get('dashboard', ({ auth, inertia }) => {
     const user = auth.getUserOrFail()
+    console.log(user)
     return inertia.render('admin/dashboard', { user })
   })
   .use(

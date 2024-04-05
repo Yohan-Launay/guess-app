@@ -3,6 +3,7 @@ import { Card } from '~/components/artist/card'
 import { InputSearch } from '~/components/input_search'
 import { faCheck, faCompactDisc, faFlagCheckered } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import LayoutApp from '~/layouts/app'
 
 const getRandomObject = (array: any) => {
   const randomObject = array[Math.floor(Math.random() * array.length)]
@@ -138,41 +139,43 @@ export default function Guess(props: { artists: any }) {
   }
 
   return (
-    <section id="section_home" className="container">
-      <p className="message">{message || "Trouvez l'artiste"}</p>
-      <InputSearch suggestions={artistNames} onEnter={addArtist} />
-      <div className="all_indice">
-        {messageOrigin && (
-          <p className="indice">
-            {messageOrigin} <FontAwesomeIcon icon={faCheck} />
-          </p>
-        )}
-        {messageNbAlbumStudio && (
-          <p className="indice">
-            <FontAwesomeIcon icon={faCompactDisc} /> {messageNbAlbumStudio}
-          </p>
-        )}
-        {messageYearsActive && (
-          <p className="indice">
-            <FontAwesomeIcon icon={faFlagCheckered} /> {messageYearsActive}
-          </p>
-        )}
-      </div>
-      <div className="content_card">
-        {selectedArtists.map((a: any) => (
-          <Card
-            key={a.id}
-            id={a.id}
-            name={a.name}
-            origin={a.origin}
-            yearsStarting={a.yearsStarting}
-            nbAlbumStudio={a.nbAlbumStudio}
-            imgPath={a.imgPath}
-            genres={a.genres}
-            labels={a.labels}
-          />
-        ))}
-      </div>
-    </section>
+    <LayoutApp>
+      <section id="section_home" className="container">
+        <p className="message">{message || "Trouvez l'artiste"}</p>
+        <InputSearch suggestions={artistNames} onEnter={addArtist} />
+        <div className="all_indice">
+          {messageOrigin && (
+            <p className="indice">
+              {messageOrigin} <FontAwesomeIcon icon={faCheck} />
+            </p>
+          )}
+          {messageNbAlbumStudio && (
+            <p className="indice">
+              <FontAwesomeIcon icon={faCompactDisc} /> {messageNbAlbumStudio}
+            </p>
+          )}
+          {messageYearsActive && (
+            <p className="indice">
+              <FontAwesomeIcon icon={faFlagCheckered} /> {messageYearsActive}
+            </p>
+          )}
+        </div>
+        <div className="content_card">
+          {selectedArtists.map((a: any) => (
+            <Card
+              key={a.id}
+              id={a.id}
+              name={a.name}
+              origin={a.origin}
+              yearsStarting={a.yearsStarting}
+              nbAlbumStudio={a.nbAlbumStudio}
+              imgPath={a.imgPath}
+              genres={a.genres}
+              labels={a.labels}
+            />
+          ))}
+        </div>
+      </section>
+    </LayoutApp>
   )
 }

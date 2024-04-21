@@ -1,12 +1,19 @@
 // MainLayout.jsx
 
-import { Link, useForm } from '@inertiajs/react'
+import { Link, useForm, usePage } from '@inertiajs/react'
 
-export default function LayoutApp({ children }: { children: React.ReactNode }) {
+interface LayoutAppProps {
+  children: React.ReactNode
+}
+
+export default function LayoutApp(props: LayoutAppProps) {
+  const { children } = props
   const { post } = useForm({})
   const handleLogout = () => {
     post('/logout')
   }
+
+  const { user } = usePage().props
 
   return (
     <main>
@@ -24,15 +31,20 @@ export default function LayoutApp({ children }: { children: React.ReactNode }) {
             </li>
           </ul>
           <ul>
-            <li>
-              <button onClick={handleLogout}>Déconnexion</button>
-            </li>
-            <li>
-              <Link href="/login">Connexion</Link>
-            </li>
-            <li>
-              <Link href="/register">Inscription</Link>
-            </li>
+            {user ? (
+              <>
+                <li>
+                  <Link href="/dashboard">Dashboard</Link>
+                </li>
+                <li>
+                  <button onClick={handleLogout}>Logout</button>
+                </li>
+              </>
+            ) : (
+              <li>
+                <Link href="/login">Login</Link>
+              </li>
+            )}
           </ul>
         </nav>
       </header>
